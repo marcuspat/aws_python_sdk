@@ -4,7 +4,7 @@ Collection of Python scripts using AWS SDK (boto3) for common AWS infrastructure
 
 ## 🎯 Overview
 
-This repository contains Python automation scripts for AWS cloud infrastructure management using boto3. Each script is designed to be standalone, reusable, and production-ready for common DevOps tasks.
+This repository contains Python automation scripts for AWS cloud infrastructure management using boto3. Each script is standalone and reusable. These are reference snippets for common DevOps tasks, not a hardened library — read them before running them against anything you care about.
 
 ## 📁 Contents
 
@@ -291,3 +291,4 @@ AWS automation scripts - Free to use and modify.
 ---
 
 **AWS Python SDK Scripts** - Automating cloud infrastructure management with reliable, production-ready Python scripts.
+**AWS Python SDK Scripts** - Reference boto3 snippets for common AWS automation tasks.
