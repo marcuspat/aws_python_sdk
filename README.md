@@ -289,6 +289,4 @@ Contributions welcome! Please:
 AWS automation scripts - Free to use and modify.
 
 ---
-
-**AWS Python SDK Scripts** - Automating cloud infrastructure management with reliable, production-ready Python scripts.
 **AWS Python SDK Scripts** - Reference boto3 snippets for common AWS automation tasks.
