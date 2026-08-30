@@ -11,8 +11,7 @@ for instance in instances:
 
     for volume in ec2.volumes.filter(Filters=[{'Name': 'attachment.instance-id', 'Values': [instance.id]}]):
         description = 'scheduled_snapshot-%s.%s' % (instance_name, volume.volume_id)
-            
-    if volume.create_snapshot(VolumeId=volume.volume_id, Description=description):
-        print("Snapshot created with description [%s]" % description)
+        if volume.create_snapshot(VolumeId=volume.volume_id, Description=description):
+            print("Snapshot created with description [%s]" % description)
 
 print("\n\nAWS snapshot backups completed")
