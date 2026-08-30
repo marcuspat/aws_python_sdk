@@ -2,9 +2,8 @@
 
 Six short, standalone Python scripts using boto3 for basic AWS tasks: EC2 volume snapshots and simple S3 operations. These are reference snippets, not a library or CLI tool — no argument parsing, no config file, no tests.
 
-## ⚠️ Known issues (2026-08-10)
+## ⚠️ Known issues
 
-- **`Backup_running_instances.py`** and **`aws_s3_list_buckets.py`** use Python 2 syntax (`filter(...)[0]` indexing and a bare `print` statement respectively) and will raise errors under Python 3. They have not been ported.
 - None of the scripts take command-line arguments, read a config file, or have a test suite. Every "parameter" (bucket name, file path, region) is hardcoded in the script and must be edited by hand before running.
 - Read each script before running it — none of them prompt for confirmation before creating snapshots or touching S3 objects.
 
@@ -16,7 +15,7 @@ Six short, standalone Python scripts using boto3 for basic AWS tasks: EC2 volume
 9 lines. Iterates every EBS volume visible to the configured credentials and calls `create_snapshot()` on each one, tagged with the volume ID in the description. No region loop, no tag-based filtering, no retention/cleanup logic — it snapshots everything, every time it runs.
 
 #### **Backup_running_instances.py**
-17 lines. Filters EC2 instances to `running` state, then snapshots each attached volume. Uses Python 2-style `filter(...)[0]` list indexing on the instance's tags, which raises `TypeError` under Python 3 (`filter()` returns an iterator, not a list). Needs a small fix (`list(filter(...))[0]` or a generator expression) before it will run on modern Python.
+17 lines. Filters EC2 instances to `running` state, then snapshots every volume attached to each one.
 
 #### **Complete_backup_script.py**
 A short script combining instance and volume enumeration into one pass. No CLI flags, no cron/EventBridge wiring, no notification integration, and no rollback logic — "complete" refers to covering both instances and volumes in one file, not to feature completeness.
@@ -27,7 +26,7 @@ A short script combining instance and volume enumeration into one pass. No CLI f
 Copies objects from one S3 bucket to another using the bucket/key names hardcoded at the top of the file. No retry logic, no cross-region handling beyond whatever boto3 does by default, no progress reporting.
 
 #### **aws_s3_list_buckets.py**
-Lists all buckets and, for each one, all object keys. Uses a Python 2 `print` statement that raises `SyntaxError` under Python 3 — needs `print(...)` parens added before it will run. No size/cost/permission analysis.
+Lists all buckets and, for each one, all object keys. No size/cost/permission analysis.
 
 #### **aws_s3_uploadfile.py**
 Uploads a single hardcoded local file to a hardcoded bucket/key. No encryption flag, no content-type detection, no batch mode.
@@ -50,10 +49,10 @@ Each script has its target (bucket name, file path, etc.) hardcoded near the top
 
 ```bash
 python Backup_all_volumes.py
-python Backup_running_instances.py   # fix the Python 3 filter() issue first, see Known issues above
+python Backup_running_instances.py
 python Complete_backup_script.py
 python aws_s3_copy_bucket_to_bucket.py
-python aws_s3_list_buckets.py        # fix the Python 3 print statement first, see Known issues above
+python aws_s3_list_buckets.py
 python aws_s3_uploadfile.py
 ```
 
@@ -128,13 +127,12 @@ Attach an IAM role to the EC2 instance running these scripts — no credentials 
 ## 🤝 Contributing
 
 Contributions welcome! Please:
-1. Fix the two Python 3 compatibility issues noted above
-2. Add basic error handling and argument parsing if you extend these
-3. Test in non-production AWS accounts first
+1. Add basic error handling and argument parsing if you extend these
+2. Test in non-production AWS accounts first
 
 ## 📝 License
 
-AWS automation scripts - Free to use and modify.
+MIT — see [LICENSE](LICENSE).
 
 ---
 **AWS Python SDK Scripts** - Six small, hardcoded boto3 reference snippets. Read before running.
