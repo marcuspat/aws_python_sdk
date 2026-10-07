@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.svg" alt="aws_python_sdk — animated banner" width="100%"></p>
+
 # AWS Python SDK Scripts
 
 Six short, standalone Python scripts using boto3 for basic AWS tasks: EC2 volume snapshots and simple S3 operations. These are reference snippets, not a library or CLI tool — no argument parsing, no config file, no tests.
